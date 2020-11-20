@@ -63,6 +63,7 @@ def actualizar(id):
         Telefono=request.form['Telefono']
         mysql.query("UPDATE persona SET Nombre = '" +Nombre+ "', Apellido = '" +Apellido+ "', Email = '" +Email+ "' ")
         sqlite.query("UPDATE persona SET Direccion = '" +Direccion+ "', Telefono = '" +Telefono+ "' ")
+        flash('Usuario actualizado')
         return redirect(url_for('index'))
 if __name__== '__main__':
     app.run(port= 3000 , debug = True)

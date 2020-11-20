@@ -1,71 +1,106 @@
-{% with messages=get_flashed_messages() %}
-{% if messages %}
-{% for message in messages %}
-<p>{{message}}</p>
-{% endfor %}
-{% endif %}
-{% endwith %}
+{% extends 'layout.html' %}
+{% block body %}
+<div class="row">
+    <div class="col-md-5">
+        {% with messages=get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
 
-<form action="/crear" method="POST">
-    <label for="Nombre">Nombre</label>
-    <input type="text" name="Nombre">
-    <br>
-    <label for="Apellido">Apellido</label>
-    <input type="text" name="Apellido">
-    <br>
-    <label for="Correo">Correo</label>
-    <input type="email" name="Email">
-    <br>
-    <label for="Direccion">Direccion</label>
-    <input type="text" name="Direccion">
-    <br>
-    <label for="Telefono">Telefono</label>
-    <input type="number" name="Telefono">
-    <br>
-    <button type="submit">
-        save
-    </button>
-</form>
-<table class="">
 
-    <thead class="">
-        <tr>
-            
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Correo</th>        
-            <th>Direccion</th>
-            <th>Telefono</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for contact in contacts %}
-        {% set key = false %}
-        <tr>
-            
-            <td>{{ contact.1 }}</td>
-            <td>{{ contact.2 }}</td>
-            <td>{{ contact.3 }}</td>
-        {% for contact2 in contacts2 %}
-            {% if contact.0 == contact2.0 and key == false %}
-            {% set key = true %}
-            <td>{{ contact2.1 }}</td>
-            <td>{{ contact2.2 }}</td>
-            {% endif %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{message}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
         {% endfor %}
-     
+        {% endif %}
+        {% endwith %}
+        <div class="card card-body">
+            <form action="/crear" method="POST">
+            <div class="form-group">
+                
+                <input type="text" name="Nombre" class="form-control" placeholder="Nombre" required>
+              
 
-           <td>
-
-            <a href="/editar/{{ contact.0 }}">editar</a>
-            <a href="/eliminar/{{ contact.0 }} ">borrar</a>
-           </td>
-           
-        </tr>
+            </div>
+            <div class="form-group">
+                
+                <input type="text" name="Apellido" class="form-control" placeholder="Apellido" required>
+                
+            </div>
+            <div class="form-group">
+                
+                <input type="email" name="Email" class="form-control" placeholder="Email" required>
+                
+            </div>
+            <div class="form-group">
+                
+                <input type="text" name="Direccion" class="form-control" placeholder="Direccion" required>
+                
+            </div>
+            <div class="form-group">
+                
+                <input type="number" name="Telefono" class="form-control" placeholder="Telefono" required>
+                <br>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-success btn-block">
+                    Crear
+                </button>
+            </div>
         
-        {% endfor %}
-    </tbody>
-</table>
 
 
+            </form>
+        </div>
+    </div>
+    <div class="col-md-7">
+        <table class=" table-striped table-bordered bg-white table-sm">
+
+            <thead class="">
+                <tr>
+
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Correo</th>
+                    <th>Direccion</th>
+                    <th>Telefono</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for contact in contacts %}
+                {% set key = false %}
+                <tr>
+
+                    <td>{{ contact.1 }}</td>
+                    <td>{{ contact.2 }}</td>
+                    <td>{{ contact.3 }}</td>
+                    {% for contact2 in contacts2 %}
+                    {% if contact.0 == contact2.0 and key == false %}
+                    {% set key = true %}
+                    <td>{{ contact2.1 }}</td>
+                    <td>{{ contact2.2 }}</td>
+                    {% endif %}
+                    {% endfor %}
+
+
+                    <td>
+
+                        <a href="/editar/{{ contact.0 }}" class="btn btn-secondary" >editar</a>
+                        <a href="/eliminar/{{ contact.0 }} " class="btn btn-danger" onclick="alert('Desea borrar este registro?')">borrar</a>
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+{% endblock %}
