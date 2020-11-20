@@ -1,0 +1,71 @@
+{% with messages=get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+<p>{{message}}</p>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+<form action="/crear" method="POST">
+    <label for="Nombre">Nombre</label>
+    <input type="text" name="Nombre">
+    <br>
+    <label for="Apellido">Apellido</label>
+    <input type="text" name="Apellido">
+    <br>
+    <label for="Correo">Correo</label>
+    <input type="email" name="Email">
+    <br>
+    <label for="Direccion">Direccion</label>
+    <input type="text" name="Direccion">
+    <br>
+    <label for="Telefono">Telefono</label>
+    <input type="number" name="Telefono">
+    <br>
+    <button type="submit">
+        save
+    </button>
+</form>
+<table class="">
+
+    <thead class="">
+        <tr>
+            
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Correo</th>        
+            <th>Direccion</th>
+            <th>Telefono</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for contact in contacts %}
+        {% set key = false %}
+        <tr>
+            
+            <td>{{ contact.1 }}</td>
+            <td>{{ contact.2 }}</td>
+            <td>{{ contact.3 }}</td>
+        {% for contact2 in contacts2 %}
+            {% if contact.0 == contact2.0 and key == false %}
+            {% set key = true %}
+            <td>{{ contact2.1 }}</td>
+            <td>{{ contact2.2 }}</td>
+            {% endif %}
+        {% endfor %}
+     
+
+           <td>
+
+            <a href="/editar/{{ contact.0 }}">editar</a>
+            <a href="/eliminar/{{ contact.0 }} ">borrar</a>
+           </td>
+           
+        </tr>
+        
+        {% endfor %}
+    </tbody>
+</table>
+
+

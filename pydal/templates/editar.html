@@ -1,0 +1,20 @@
+<form action="/actualizar/{{ contact.0 }}" method="POST">
+    <label for="Nombre">Nombre</label>
+    <input type="text" name="Nombre" value="{{ contact.1 }}">
+    <br>
+    <label for="Apellido">Apellido</label>
+    <input type="text" name="Apellido" value="{{ contact.2 }}">
+    <br>
+    <label for="Correo">Correo</label>
+    <input type="email" name="Email" value="{{ contact.3 }}">
+    <br>
+    <label for="Direccion">Direccion</label>
+    <input type="text" name="Direccion" value="{{ contact2.1 }}">
+    <br>
+    <label for="Telefono">Telefono</label>
+    <input type="number" name="Telefono" value="{{ contact2.2 }}">
+    <br>
+    <button type="submit">
+        save
+    </button>
+</form>
